@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSharper.JQueryTerminal — sample</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23111827'/%3E%3Ctext x='8' y='12' font-size='10' font-family='monospace' fill='%237dd3fc' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="Scripts/WebSharper.JQueryTerminal.Sample.min.css" />
+    <script>
+        // Apply a stored theme before first paint to avoid a flash.
+        (function () {
+            try {
+                var t = localStorage.getItem("ws-jqueryterminal-theme");
+                if (t === "dark" || t === "light") {
+                    document.documentElement.setAttribute("data-theme", t);
+                }
+            } catch (e) { /* storage can be blocked */ }
+        })();
+    </script>
+    <!-- ws-head -->
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-titles">
+            <h1>WebSharper.JQueryTerminal</h1>
+            <p>jQuery Terminal bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
+        </div>
+        <div class="app-actions">
+            <button class="btn btn-ghost" ws-onclick="toggleTheme">${themeLabel}</button>
+            <a class="app-source" href="https://github.com/dotnet-websharper/JQuery.Terminal">Source</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="card terminal-card">
+            <header class="card-header">
+                <h2>Terminal</h2>
+                <p>
+                    The interpreter below covers echoing and formatting, prompts,
+                    history, nested interpreters (push/pop), pause/freeze/enable,
+                    command execution and state export.
+                </p>
+            </header>
+            <div id="terminal"></div>
+        </section>
+
+        <aside class="sidebar">
+            <section class="card">
+                <header class="card-header">
+                    <h2>API controls</h2>
+                    <p>Each button drives one part of the binding.</p>
+                </header>
+                <div class="toolbar">
+                    <div class="group">
+                        <span class="label">Output</span>
+                        <button class="btn" ws-onclick="echo">Echo</button>
+                        <button class="btn" ws-onclick="echoHtml">Echo HTML</button>
+                        <button class="btn" ws-onclick="clear">Clear</button>
+                        <button class="btn" ws-onclick="reset">Reset</button>
+                    </div>
+                    <div class="group">
+                        <span class="label">Prompt &amp; input</span>
+                        <button class="btn" ws-onclick="setPrompt">Set prompt</button>
+                        <button class="btn" ws-onclick="insertText">Insert text</button>
+                        <input class="input" type="text" ws-var="commandText" placeholder="command to exec..." />
+                        <button class="btn btn-primary" ws-onclick="execCommand">Exec</button>
+                    </div>
+                    <div class="group">
+                        <span class="label">Interpreters</span>
+                        <button class="btn" ws-onclick="pushInterpreter">Push</button>
+                        <button class="btn" ws-onclick="popInterpreter">Pop</button>
+                    </div>
+                    <div class="group">
+                        <span class="label">State</span>
+                        <button class="btn" ws-onclick="pauseTerminal">Pause</button>
+                        <button class="btn" ws-onclick="resumeTerminal">Resume</button>
+                        <button class="btn" ws-onclick="freezeTerminal">Freeze</button>
+                        <button class="btn" ws-onclick="disableTerminal">Disable</button>
+                    </div>
+                    <div class="group">
+                        <span class="label">Inspect</span>
+                        <button class="btn" ws-onclick="refreshState">Refresh</button>
+                        <button class="btn" ws-onclick="showOutput">Get output</button>
+                        <button class="btn" ws-onclick="showHistory">History</button>
+                        <button class="btn" ws-onclick="exportView">Export view</button>
+                        <button class="btn" ws-onclick="probeApi">API tour</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <header class="card-header">
+                    <h2>Binding state</h2>
+                </header>
+                <dl class="readout">
+                    <div><dt>Version</dt><dd>${version}</dd></div>
+                    <div><dt>Rows × cols</dt><dd>${geometry}</dd></div>
+                    <div><dt>Level</dt><dd>${level}</dd></div>
+                    <div><dt>Settings</dt><dd>${settings}</dd></div>
+                    <div><dt>History</dt><dd>${history}</dd></div>
+                </dl>
+                <p class="status">${status}</p>
+            </section>
+
+            <section class="card">
+                <header class="card-header">
+                    <h2>Static helpers</h2>
+                    <p>Driven directly through <code>$.terminal</code>.</p>
+                </header>
+                <pre class="output">${staticHelpers}</pre>
+            </section>
+
+            <section class="card">
+                <header class="card-header">
+                    <h2>Try these</h2>
+                </header>
+                <ul class="hints">
+                    <li><code>help</code> — list the commands</li>
+                    <li><code>echo hello</code> — echo through the interpreter</li>
+                    <li><code>raw</code> — echo HTML markup</li>
+                    <li><code>prompt &gt; </code> — change the prompt</li>
+                    <li><code>push</code> / <code>pop</code> — nested interpreters</li>
+                    <li><code>history</code> — print the command history</li>
+                    <li><code>state</code> — export the terminal view</li>
+                </ul>
+            </section>
+        </aside>
+
+        <section class="card output-card">
+            <header class="card-header">
+                <h2>Last result</h2>
+            </header>
+            <pre class="output">${output}</pre>
+        </section>
+    </main>
+
+    <script type="text/javascript" src="Scripts/WebSharper.JQueryTerminal.Sample.min.js"></script>
+</body>
+</html>

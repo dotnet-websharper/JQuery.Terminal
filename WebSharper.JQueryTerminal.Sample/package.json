@@ -1,0 +1,16 @@
+{
+  "name": "WebSharper.JQueryTerminal.Sample",
+  "version": "1.0.0",
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "dependencies": {
+    "jquery": "^4.0.0",
+    "jquery.terminal": "^2.48.1"
+  },
+  "overrides": {
+    "jquery.terminal": {
+      "jquery": "$jquery"
+    }
+  }
+}

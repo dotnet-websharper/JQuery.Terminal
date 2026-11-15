@@ -391,7 +391,7 @@ module Client =
             check "login_name" (fun () -> if Optional.isDefined (t.LoginName()) then "present" else "(none)")
             check "prefix_name" (fun () -> t.PrefixName())
             check "get/set command" (fun () ->
-                t.SetCommand("probe")
+                t.SetCommand("probe") |> ignore
                 let c = t.GetCommand()
                 t.SetCommand("") |> ignore
                 c)

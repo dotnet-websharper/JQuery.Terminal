@@ -1,0 +1,300 @@
+:root {
+    color-scheme: light;
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --ink: #141a24;
+    --muted: #5a6473;
+    --line: #e0e5ee;
+    --accent: #0f766e;
+    --accent-ink: #ffffff;
+    --header-bg: #0f172a;
+    --header-ink: #f8fafc;
+    --header-muted: #b6c2d6;
+    --code-bg: #eef2f8;
+    --terminal-bg: #ffffff;
+    --terminal-ink: #141a24;
+    --terminal-prompt: #0f766e;
+    --terminal-error: #b91c1c;
+    --terminal-intermediate: #2563eb;
+    --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0b1020;
+    --card: #141a2c;
+    --ink: #e6ebf5;
+    --muted: #9aa6bd;
+    --line: #26314c;
+    --accent: #2dd4bf;
+    --accent-ink: #04211d;
+    --header-bg: #060915;
+    --header-ink: #e6ebf5;
+    --header-muted: #8b98b2;
+    --code-bg: #1c2439;
+    --terminal-bg: #0d1326;
+    --terminal-ink: #e6ebf5;
+    --terminal-prompt: #2dd4bf;
+    --terminal-error: #f87171;
+    --terminal-intermediate: #93c5fd;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--header-bg);
+    color: var(--header-ink);
+}
+
+.app-titles h1 {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+}
+
+.app-titles p {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: var(--header-muted);
+}
+
+.app-titles a { color: #7dd3fc; }
+
+.app-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.app-source {
+    color: var(--header-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 1px solid #3a4560;
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+}
+
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 1.25rem;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1rem 1.1rem 1.1rem;
+}
+
+.card-header h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+}
+
+.card-header p {
+    margin: 0 0 0.85rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.terminal-card {
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-card .card-header {
+    flex: 0 0 auto;
+}
+
+#terminal {
+    flex: 1;
+    min-height: 460px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.output-card {
+    grid-column: 1 / -1;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-right: 0.15rem;
+}
+
+.btn {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.38rem 0.7rem;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.btn:hover { border-color: var(--accent); }
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--header-ink);
+    border-color: #3a4560;
+}
+
+.input {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.38rem 0.6rem;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    min-width: 160px;
+}
+
+.readout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1rem;
+    margin: 0;
+}
+
+.readout div {
+    min-width: 0;
+}
+
+.readout div:nth-child(4) {
+    grid-column: 1 / -1;
+}
+
+.readout dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+}
+
+.readout dd {
+    margin: 0.1rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    overflow-wrap: break-word;
+}
+
+.status {
+    margin: 0.9rem 0 0;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    background: var(--code-bg);
+    font-size: 0.85rem;
+}
+
+.hints {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+.hints code {
+    background: var(--code-bg);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.output {
+    margin: 0;
+    padding: 0.8rem;
+    background: var(--code-bg);
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 340px;
+    overflow: auto;
+}
+
+/* jQuery Terminal theming: the package stylesheet is bundled before this one. */
+.terminal {
+    --size: 1.2;
+    --color: var(--terminal-ink);
+    --background: var(--terminal-bg);
+    --link-color: var(--accent);
+    background: var(--terminal-bg);
+    color: var(--terminal-ink);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    height: 100%;
+}
+
+.terminal .cmd .prompt,
+.terminal .prompt {
+    color: var(--terminal-prompt);
+}
+
+.terminal .error { color: var(--terminal-error); }
+
+.terminal .terminal-output .format { color: var(--muted); }
+
+.terminal .token.operator,
+.terminal .token.entity,
+.terminal .token.intermediate { color: var(--terminal-intermediate); }
+
+@media (max-width: 900px) {
+    .page { grid-template-columns: minmax(0, 1fr); }
+    .terminal-card { grid-row: auto; }
+}
